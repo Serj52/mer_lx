@@ -1,0 +1,10 @@
+/commands
+venv/
+Attachments/
+Load/
+Logs/
+Soft/
+year.txt
+.idea
+
+/Soft/chromedriver

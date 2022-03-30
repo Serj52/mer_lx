@@ -1,0 +1,16 @@
+keyring==23.2.1
+lazy-object-proxy==1.6.0
+lxml==4.6.3
+numpy==1.21.5
+openpyxl==3.0.7
+pandas==1.1.5
+schedule==1.1.0
+selenium==4.0.0
+xlrd==2.0.1
+zipp==3.4.1
+pywin32==301
+pywin32-ctypes==0.2.0
+pywinauto==0.6.8
+
+
+#Для установки selenium может пригодиться команда pip install pyopenssl --upgrade cryptography
