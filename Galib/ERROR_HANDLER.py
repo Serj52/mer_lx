@@ -1,13 +1,13 @@
 import os
 import traceback
-import pyautogui
-import win32com
-import win32com.client as win32
+# import pyautogui
+# import win32com
+# import win32com.client as win32
 from datetime import datetime, timedelta
 from threading import Thread
 import logging
 from datetime import datetime
-from outlook import Outlook
+# from outlook import Outlook
 
 
 class ErrorHandler:
@@ -82,46 +82,46 @@ class ErrorHandler:
             print(f'{datetime.now()} Робот остановлен')
             self.finally_execution()
             exit(-1)
-            Outlook.send_mail(to=self.support_email,
-                              body=f'Робот {self.robot_name} остановлен. Ошибка в блоке {self.name_def}',
-                              subject='ERROR')
+            # Outlook.send_mail(to=self.support_email,
+            #                   body=f'Робот {self.robot_name} остановлен. Ошибка в блоке {self.name_def}',
+            #                   subject='ERROR')
         else:
             pass
         self.finally_execution()
 
-    def timer(self, minutes_wait):
-        """ПРоверяет текущее время, если ожидаемое время истекло, направляет письмо в поддержку
-        После отправки робот продолжает работу
-        minutes_wait - ожидаемое время выполнения блока выделенного блока
-        eh = ErrorHndler(name_def, config, mitutes_wait=5)
-        while True:
-            with eh:
-                your_funcrtion()
-                break
-        """
-        import pythoncom
-        pythoncom.CoInitialize()
-        start = datetime.now()
-        while True:
-            if not self.flag_to_stop_timer:
-                # Проверяем текущее время, если больше minutes_wait, направляем птсьмл в поддержку
-                if datetime.now() - timedelta(minutes=minutes_wait) >= start:
-                    outlook = None
-                    try:
-                        outlook = win32com.client.Dispatch('Outlook.Application')
-                        mail = outlook.CreateItem(0)
-                        mail.To = self.config.support_email
-                        mail.Subject = f'TIME OUT in {self.robot_name}'
-                        mail.Body = f'Ожидаемое время выполнения задачи: {self.name_def}'
-                        mail.Send()
-                        self.flag_to_stop_timer = True
-                    except Exception:
-                        logging.critical(f'Письмо не отправлено {traceback.format_exc()}')
-
-                    finally:
-                        del outlook
-            else:
-                break
+    # def timer(self, minutes_wait):
+    #     """ПРоверяет текущее время, если ожидаемое время истекло, направляет письмо в поддержку
+    #     После отправки робот продолжает работу
+    #     minutes_wait - ожидаемое время выполнения блока выделенного блока
+    #     eh = ErrorHndler(name_def, config, mitutes_wait=5)
+    #     while True:
+    #         with eh:
+    #             your_funcrtion()
+    #             break
+    #     """
+    #     import pythoncom
+    #     pythoncom.CoInitialize()
+    #     start = datetime.now()
+    #     while True:
+    #         if not self.flag_to_stop_timer:
+    #             # Проверяем текущее время, если больше minutes_wait, направляем птсьмл в поддержку
+    #             if datetime.now() - timedelta(minutes=minutes_wait) >= start:
+    #                 outlook = None
+    #                 try:
+    #                     outlook = win32com.client.Dispatch('Outlook.Application')
+    #                     mail = outlook.CreateItem(0)
+    #                     mail.To = self.config.support_email
+    #                     mail.Subject = f'TIME OUT in {self.robot_name}'
+    #                     mail.Body = f'Ожидаемое время выполнения задачи: {self.name_def}'
+    #                     mail.Send()
+    #                     self.flag_to_stop_timer = True
+    #                 except Exception:
+    #                     logging.critical(f'Письмо не отправлено {traceback.format_exc()}')
+    #
+    #                 finally:
+    #                     del outlook
+    #         else:
+    #             break
 
     def restart_block_on_error(self):
         """

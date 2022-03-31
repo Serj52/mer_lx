@@ -79,7 +79,7 @@ class Config:
     elif mode.lower() == 'test':
         support_email = 'blackday52@mail.ru'
         driver_path = os.path.join(folder_root, 'Soft/chromedriver')
-        browser_path = r'usr/bin/google-chrome'
+        browser_path = r'/opt/google/chrome/google-chrome'
         current_year = int('2021')
         work_date = [16, 17]
         work_month = [12, '']
