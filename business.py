@@ -7,6 +7,7 @@ from config import Config
 from zip_worker import Zipworker
 # from outlook import Outlook
 from Galib.LOGGER import Log
+from exchangelib import Credentials, Account, Configuration, DELEGATE, IMPERSONATION, Message, Mailbox
 
 
 class Business:
@@ -17,7 +18,7 @@ class Business:
         self.zp = Zipworker(config)  # объект для работы с архивом
         # self.otl = Outlook() # объект для работы с Outlook
 
-    # def search_mail(self):
+    # def search_mail_out(self):
     #     """Функция проверки почты"""
     #     #Запуск почты
     #     self.otl.run()
@@ -25,6 +26,33 @@ class Business:
     #     if self.otl.get_mail_data_by_subjects(self.config):
     #         return True
     #     return False
+
+    # def search_mail_out(self):
+    #     """Функция проверки почты"""
+    #     #Запуск почты
+    #     self.otl.run()
+    #     # Если письмо пришло возвращаем True
+    #     if self.otl.get_mail_data_by_subjects(self.config):
+    #         return True
+    #     return False
+
+    def search_mail_exc(self):
+        server = 'mail.rosatom.ru'
+        email = 'GREN-r-000004@Greenatom.ru'
+        name = r'gk\GREN-r-000004'
+        password = 'Bayern2024'
+        credentials = Credentials(name, password)
+        config = Configuration(server=server, credentials=credentials)
+        account = Account(primary_smtp_address=email, config=config, credentials=credentials, autodiscover=True,
+                          access_type=DELEGATE)
+
+
+        for item in account.inbox.all().order_by('-datetime_received')[:100]:
+            # {item.sender}, {item.datetime_received}
+            # print(f'{count}. {item.subject}')
+            if item.subject == 'Сценарные условия':
+                print(f'Нашел письмо от {item.sender}')
+                return True
 
     def data_process(self):
         """в этом блоке реализуется главная логика загрузки архивов с сайта и извлечению файлов"""
