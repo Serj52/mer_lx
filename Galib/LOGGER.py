@@ -21,7 +21,7 @@ class Log:
                 f'logs_archive {datetime.strftime(datetime.now(),"%d-%m-%Y %H-%M-%S")}.zip')
             newzip = zipfile.ZipFile(zname, 'w')  # создаем архив
             for file in list_logs:
-                if '.zip' not in file:
+                if '.log' in file:
                     # добавляем файл в архив
                     newzip.write(os.path.join(Config.folder_logs, file), file)
                     os.remove(os.path.join(Config.folder_logs, file))

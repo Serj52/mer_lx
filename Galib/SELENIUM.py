@@ -20,6 +20,9 @@ from config import Config
 class Connection:
     """Класс по настройке соединения"""
 
+
+
+
     def __init__(self):
         self.config = Config()
         self.options = webdriver.ChromeOptions()
@@ -28,20 +31,37 @@ class Connection:
 
 
     def set_options(self, folder_load):
-        """Установка опций вебдрайвера"""
+        # Без графического интерфейса браузера
+        self.options.add_argument("--headless")
+        self.options.add_argument("--no-sandbox")
+        self.options.add_argument("--disable-dev-shm-usage")
+        self.options.add_argument("--window-size=1920x1080")
+
         self.options.add_experimental_option('excludeSwitches', ['enable-logging'])
-        self.options.binary_location = self.browser_path
+        # self.options.binary_location = self.browser_path
         self.options.add_experimental_option('prefs', {'download.default_directory': folder_load,
                                                        "safebrowsing.enabled": False,
                                                        "download.prompt_for_download": False,
                                                        "download.directory_upgrade": True,
                                                        })
-        # Без графического интерфейса браузера
-        # self.options.add_argument("--headless")
+
+
+    # def set_options(self, folder_load):
+    #     """Установка опций вебдрайвера"""
+    #     self.options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    #     self.options.binary_location = self.browser_path
+    #     self.options.add_experimental_option('prefs', {'download.default_directory': folder_load,
+    #                                                    "safebrowsing.enabled": False,
+    #                                                    "download.prompt_for_download": False,
+    #                                                    "download.directory_upgrade": True,
+    #                                                    })
+    #     # Без графического интерфейса браузера
+    #     # self.options.add_argument("--headless")
 
     def set_driver(self):
         """Создание вебдрайвера"""
-        self.driver = webdriver.Chrome(options=self.options, executable_path=self.driver_path)
+        # self.driver = webdriver.Chrome(options=self.options, executable_path=self.driver_path)
+        self.driver = webdriver.Chrome(options=self.options)
 
 
 class BaseSelenium:
@@ -51,16 +71,16 @@ class BaseSelenium:
         self.config = Config()
 
     def open_site(self, folder_load, site_url):
-        """Открытие сайта"""
-        eh = ErrorHandler('open_site', self.config, tries_count=2)
-        while True:
-            with eh:
+        # """Открытие сайта"""
+        # eh = ErrorHandler('open_site', self.config, tries_count=2)
+        # while True:
+        #     with eh:
                 self.conn.set_options(folder_load)
                 self.conn.set_driver()
                 lg.info(f'Open URL:{site_url}')
                 print(f'{datetime.now()} Open URL:{site_url}')
                 self.conn.driver.get(site_url)
-                break
+                # break
 
     def close_site(self):
         """Закрытие сайта"""

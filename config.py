@@ -54,17 +54,17 @@ class Config:
                        'Долгосрочный прогноз': f'//a[contains(@title, "Прогноз социально-экономического развития Российской Федерации на период до {exctract_year} года")]'}
 
     # Создаем директории
-    [os.makedirs(dir, exist_ok=True) for dir in
-     [
-         folder_load_forecast['Сценарные условия'],
-         folder_load_forecast['Среднесрочный прогноз'],
-         folder_load_forecast['Долгосрочный прогноз'],
-         folder_screen_forecast['Сценарные условия'],
-         folder_screen_forecast['Среднесрочный прогноз'],
-         folder_screen_forecast['Долгосрочный прогноз'],
-         folder_attachment,
-         folder_logs,
-     ]]
+    # [os.makedirs(dir, exist_ok=True) for dir in
+    #  [
+    #      folder_load_forecast['Сценарные условия'],
+    #      folder_load_forecast['Среднесрочный прогноз'],
+    #      folder_load_forecast['Долгосрочный прогноз'],
+    #      folder_screen_forecast['Сценарные условия'],
+    #      folder_screen_forecast['Среднесрочный прогноз'],
+    #      folder_screen_forecast['Долгосрочный прогноз'],
+    #      folder_attachment,
+    #      folder_logs,
+    #  ]]
 
     #Выбор типа параметров
     if mode.lower() == 'prod':

@@ -21,8 +21,8 @@ class Robot:
             #     print('Робот начинает работу')
             #     lg.info('Робот начинает работу')
                 # Если пришло нужное сообщение начинаем работу с сайтом
-        if self.bus.search_mail_exc():
-            self.bus.data_process()
+        # if self.bus.search_mail_exc():
+        self.bus.data_process()
         # print('Перерыв 1 мин')
         # time.sleep(60)
 

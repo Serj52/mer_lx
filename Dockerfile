@@ -13,7 +13,12 @@
 #sudo docker volume create my-vol
 #sudo docker volume inspect my-vol
 #df -h
-# docker run --rm --mount type=bind,source=/home/serj52/PycharmProjects/mer/Load,target=/mer/Load --name web mer
+
+# docker run --rm --mount type=bind,source=/home/serj52/PycharmProjects/mer_lx/Load,target=/mer/Load --name web mer
+# docker run --rm --mount type=bind,source=/home/serj52/PycharmProjects/mer_lx/,target=/mer/ --name web mer
+
+
+
 
 
 
