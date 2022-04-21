@@ -1,0 +1,11 @@
+#!/bin/bash
+
+event=`python3 search_event.py`
+
+if [[ $event -eq 1 ]]
+then
+echo `docker run --rm --mount type=bind,source=/home/serj52/PycharmProjects/mer_lx/,target=/mer/ --name web mer`
+else
+echo "Событие не наступило"
+fi
+
